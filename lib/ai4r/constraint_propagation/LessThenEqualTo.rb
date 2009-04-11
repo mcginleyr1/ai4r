@@ -8,4 +8,10 @@ class LessThenEqualTo<Edge
 		@righthandnode = righthand
 		@inequality = '<='
 	end
+
+	def reducedomains
+		while( not lefthand.max @inequality righthand.max )
+			lefthand.end( lefthand.end-- ) 
+		end
+	end
 end

@@ -1,11 +1,19 @@
 class Edge
-	attr_accessor :inequality, :lefthandnode, :righthandnode
+	attr_accessor :inequality, :leftnode, :rightnode
 
 	def initialize( lefthand, righthand )
-		@lefthandnode = lefthand
-		@righthandnode = righthand
+		@leftnode = lefthand
+		@rightnode = righthand
 	end
 
-	def removefromranges
+	def reducedomains
+	end
+
+	def removefront( arange )
+		Range.new( arange.first++, arange.last )
+	end
+
+	def removeback( arange )
+		Range.new( arange.first, arange.last-- )
 	end
 end

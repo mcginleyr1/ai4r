@@ -1,8 +1,8 @@
 class Node
-	attr_accessor :possiblevalues, :edges
+	attr_accessor :values, :edges
 
 	def initialize( startvalue, endvalue )
-		:possiblevalues << (starvalue..endvalue)
+		:values << (starvalue..endvalue)
 	end
 
 	def reducedomain
