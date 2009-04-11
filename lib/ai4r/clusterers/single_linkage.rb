@@ -177,4 +177,3 @@ module Ai4r
     end
   end
 end
-

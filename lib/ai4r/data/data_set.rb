@@ -9,10 +9,18 @@
 
 require 'csv'
 require 'set'
+require File.dirname(__FILE__) + '/statistics'
 
 module Ai4r
   module Data
+  
+    # A data set is a collection of N data items. Each data item is 
+    # described by a set of attributes, represented as an array.
+    # Optionally, you can assign a label to the attributes, using 
+    # the data_labels property.
     class DataSet
+      
+      @@number_regex = /(((\b[0-9]+)?\.)?\b[0-9]+([eE][-+]?[0-9]+)?\b)/
       
       attr_reader :data_labels, :data_items 
       
@@ -24,7 +32,7 @@ module Ai4r
       # If you provide data items, but no data labels, the data set will
       # use the default data label values (see set_data_labels)
       def initialize(options = {})
-        @data_labels = options[:data_labels] || []
+        @data_labels = []
         @data_items = options[:data_items] || []
         set_data_labels(options[:data_labels]) if options[:data_labels]
         set_data_items(options[:data_items]) if options[:data_items]
@@ -51,6 +59,15 @@ module Ai4r
         load_csv(filepath)
         @data_labels = @data_items.shift
         return self
+      end
+      
+      # Same as load_csv, but it will try to convert cell contents as numbers.
+      def parse_csv(filepath)
+        items = []
+        CSV::Reader.parse(File.open(filepath, 'r')) do |row|
+          items << row.collect{|x| (x.match(@@number_regex)) ? x.to_f : x.data }
+        end
+        set_data_items(items)
       end
       
       # Set data labels.
@@ -144,7 +161,7 @@ module Ai4r
       #   get_index("gender") 
       #   => 2
       def get_index(attr)
-        return (attr.is_a?(String)) ? @data_labels.index(attr) : attr
+        return (attr.is_a?(Fixnum) || attr.is_a?(Range)) ? attr : @data_labels.index(attr)
       end
       
       # Raise an exception if there is no data item.
@@ -168,53 +185,19 @@ module Ai4r
           @data_items << data_item
         end
       end
-      
-      # Get the mean value of a numeric attribute.
-      # The parameter can be an index number or label
-      def get_attribute_mean(attribute)
-        index = get_index(attribute)
-        mean = 0.0
-        @data_items.each { |data_item| mean += data_item[index] }
-        mean /= @data_items.length
-        return mean
-      end
-      
-      # Get the most frequent value of an attribute.
-      # The parameter can be an index number or label
-      def get_attribute_mode(attribute)
-        index = get_index(attribute)
-        domain = build_domain(attribute)
-        count = {}
-        domain.each {|value| count[value]=0}
-        @data_items.each { |data_item| count[data_item[index]] += 1 }
-        max_count = 0
-        mode = nil
-        count.each_pair do |value, value_count|
-          if value_count > max_count
-            mode = value
-            max_count = value_count
-          end
-        end
-        return mode
-      end
-      
-      # The parameter can be an index number or label
-      # If the attribute is numeric, it will return the mean value. Otherwise, 
-      # it will return the most frequent value
-      def get_attribute_mean_or_mode(attribute)
-        index = get_index(attribute)
-        if @data_items.first[index].is_a?(Numeric)
-          return get_attribute_mean(attribute)
-        else
-          return get_attribute_mode(attribute)
-        end
-      end
-
-      # Returns an arran with the mean value of numeric attributes, and 
+     
+      # Returns an array with the mean value of numeric attributes, and 
       # the most frequent value of non numeric attributes
       def get_mean_or_mode
         mean = []
-        num_attributes.times {|i| mean[i] = get_attribute_mean_or_mode(i) }
+        num_attributes.times do |i| 
+          mean[i] = 
+            if @data_items.first[i].is_a?(Numeric)
+              Statistics.mean(self, i)
+            else
+              Statistics.mode(self, i)
+            end
+        end
         return mean
       end
       

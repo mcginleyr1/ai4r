@@ -1,9 +1,12 @@
-1.5 (In progress)
+1.5
   * ClassifierEvaluator class added: Ideal for experimentation with classifiers
   * New classifier: Multilayer Perceptron using Backpropagation neural network
   * New clusterer: Hierarchical Single Linkage
   * New clusterer: Hierarchical Complete Linkage
   * New clusterer: Hierarchical Average Linkage
+  * Simple Statistics module added
+  * Simple Proximity functions module added
+  * New parameter for K-Means based clusterers: Custom centroid function
 1.4 
   * Backpropagation neural networks rebuilt from zero: Faster, leaner code, more parameterizable. 
   * All algorithms include the Parameterizable module.
