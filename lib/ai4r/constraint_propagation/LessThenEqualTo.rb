@@ -10,8 +10,12 @@ class LessThenEqualTo<Edge
 	end
 
 	def reducedomains
-		while( not lefthand.max @inequality righthand.max )
-			lefthand.end( lefthand.end-- ) 
+		while( not @lefthand.values.first @inequality @righthand.values.first )
+			@righthand.values = self.removefront @righthandvalues
+		end
+
+		while( not @lefthand.values.last @inequality @righthand.values.last )
+			@lefthand.values = self.removeback @lefthand.values
 		end
 	end
 end

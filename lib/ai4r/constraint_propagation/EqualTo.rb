@@ -25,7 +25,5 @@ class EqualTo<Edge
 		while( not @rightnode.values.include @leftnode.values.first )
 			@leftnode.value = self.removefront @leftnode.value 
 		end
-
-				
 	end
 end
