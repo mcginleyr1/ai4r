@@ -1,13 +1,15 @@
 class Node
-	attr_accessor :values, :edges
+	attr_accessor :values, :inputs, :outputs
 
 	def initialize( startvalue, endvalue )
 		:values << (starvalue..endvalue)
 	end
 
-	def reducedomain
-		@edges.each do |anedge| 
+	def add_output( righthandnode, edgetype )
+		edgetype.new( self, righthandnode )
+	end
 
-		end
+	def add_input( lefthandnode, edgetype )
+		edgetype.new( lefthandnode, self )
 	end
 end

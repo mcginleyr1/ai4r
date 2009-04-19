@@ -4,6 +4,8 @@ class Edge
 	def initialize( lefthand, righthand )
 		@leftnode = lefthand
 		@rightnode = righthand
+		@leftnode.outputs.add self
+		@rightnode.inputs.add self
 	end
 
 	def reducedomains
