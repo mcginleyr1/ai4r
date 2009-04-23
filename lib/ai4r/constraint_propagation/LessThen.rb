@@ -14,12 +14,18 @@ class LessThen<Edge
 			@leftnode.values = Range.new(0,0)
 		end
 
-		while( not @inequality.call @leftnode.values.first, @rightnode.values.first ) 
-			@rightnode.values = self.removefront @rightnode.values
+		if( not @inequality.call @leftnode.values.first, @rightnode.values.first ) 
+			@rightnode.values = Range.new( @leftnode.values.first + 1, @rightnode.values.last )
 		end
+#		while( not @inequality.call @leftnode.values.first, @rightnode.values.first ) 
+#			@rightnode.values = self.removefront @rightnode
+#		end
 
-		while( not @inequality.call @leftnode.values.last, @rightnode.values.last ) 
-			@leftnode.values = self.removeback @leftnode.values
+		if( not @inequality.call @leftnode.values.last, @rightnode.values.last ) 
+			@leftnode.values = Range.new( @leftnode.values.first, @rightnode.values.last - 1 )
 		end
+#		while( not @inequality.call @leftnode.values.last, @rightnode.values.last ) 
+#			@leftnode.values = self.removeback @leftnode
+#		end
 	end
 end

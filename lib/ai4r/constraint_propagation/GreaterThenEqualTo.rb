@@ -10,15 +10,23 @@ class GreaterThenEqualTo<Edge
 	end
 
 	def reducedomains
-		if( not @inequality.call @leftnode.values.first, @rightnode.values.last )
-			@leftnode.values = Range.new(0, 0)
+		if( not @inequality.call @leftnode.values.last, @rightnode.values.first )
+			@rightnode.values = nil 
 		end
-		while( not @inequality.call @leftnode.values.first, @rightnode.values.first )
-			@leftnode.values = self.removefront @leftnode.values 
+		
+		if( not @inequality.call @leftnode.values.first, @rightnode.values.first )
+			@leftnode.values = Range.new( @rightnode.values.first, @leftnode.values.last )
 		end
-
-		while( not @inequality.call @leftnode.values.last, @rightnode.values.last )
-			@rightnode.values = self.removeback @rightnode.values
+	
+		if( not @inequality.call @leftnode.values.last, @rightnode.values.last )
+			@rightnode.values = Range.new( @rightnode.values.first, @leftnode.values.last )
 		end
+#		while( not @inequality.call @leftnode.values.first, @rightnode.values.first )
+#			@leftnode.values = self.removefront @leftnode
+#		end
+	
+#		while( not @inequality.call @leftnode.values.last, @rightnode.values.last )
+#			@rightnode.values = self.removeback @rightnode 
+#		end
 	end
 end

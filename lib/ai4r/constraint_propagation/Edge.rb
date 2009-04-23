@@ -11,11 +11,11 @@ class Edge
 	def reducedomains
 	end
 
-	def removefront(arange)
-		Range.new(arange.first + 1, arange.last)
+	def removefront(anode)
+		Range.new( anode.values.first + 1, anode.values.last)
 	end
 
-	def removeback(arange)
-		Range.new(arange.first, arange.last - 1)
+	def removeback(anode)
+		Range.new( anode.values.first, anode.values.last - 1)
 	end
 end

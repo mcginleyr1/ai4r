@@ -11,19 +11,19 @@ class EqualTo<Edge
 
 	def reducedomains
 		while(not @rightnode.values.include? @leftnode.values.first)
-			@leftnode.values = self.removefront @leftnode.values 
+			@leftnode.values = self.removefront @leftnode
 		end
 		
 		while(not @rightnode.values.include? @leftnode.values.last)
-			@leftnode.values = self.removeback @leftnode.values 
+			@leftnode.values = self.removeback @leftnode
 		end
 
 		while(not @leftnode.values.include? @rightnode.values.first)
-			@rightnode.values = self.removefront @rightnode.values 
+			@rightnode.values = self.removefront @rightnode
 		end
 		
 		while(not @leftnode.values.include? @rightnode.values.last)
-			@righttnode.values = self.removeback @rightnode.values 
+			@righttnode.values = self.removeback @rightnode
 		end
 	end
 end

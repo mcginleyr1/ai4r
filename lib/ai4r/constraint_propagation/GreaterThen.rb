@@ -10,12 +10,20 @@ class GreaterThen<Edge
 	end
 
 	def reducedomains
-		while(not @inequality.call @leftnode.values.last, @rightnode.values.last)
-			@rightnode.values = self.removeback @rightnode.values
+		if( not @inequality.call @leftnode.values.last, @rightnode.values.last )
+				@rightnode.values = Range.new( @rightnode.first, @leftnode.values.last - 1 )
+		end
+		
+		if( not @inequality.call @leftnode.values.first, @rightnode.values.first )
+			@leftnode.values = Range.new( @rightnode.values.first + 1, @leftnode.values.last )
 		end
 
-		while(not @inequality.call @leftnode.values.first, @rightnode.values.first)
-			@leftnode.values = self.removefront @leftnode.values
-		end
+#		while( not @inequality.call @leftnode.values.last, @rightnode.values.last )
+#				@rightnode.values = self.removeback @rightnode
+#		end
+		
+#		while( not @inequality.call @leftnode.values.first, @rightnode.values.first )
+#			@leftnode.values = self.removefront @leftnode
+#		end
 	end
 end
