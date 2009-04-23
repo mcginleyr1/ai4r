@@ -1,23 +1,23 @@
 class GreaterThenEqualTo<Edge
 	def initialize 
-		@inequalifty = '>='
+		@inequality = lambda { | a, b | a >= b }
 	end
 	
-	def initalize( lefthand, righthand )
+	def initialize(lefthand, righthand)
 		@leftnode = lefthand
 		@rightnode = righthand
-		@inequality = '>='
+		@inequality = lambda { | a, b | a >= b }
 	end
 
-	def reducedomain
-		if( not @leftnode.values.first @inequality @rightnode.values.last )
-			@leftnode.values = Range.new( 0, 0 )
+	def reducedomains
+		if( not @inequality.call @leftnode.values.first, @rightnode.values.last )
+			@leftnode.values = Range.new(0, 0)
 		end
-		while( not @leftnode.values.first @inequality @rightnode.values.first )
-			@lefttnode.values = self.removefront @lefttnode.values 
+		while( not @inequality.call @leftnode.values.first, @rightnode.values.first )
+			@leftnode.values = self.removefront @leftnode.values 
 		end
 
-		while( not @leftnode.values.last @inequality @rightnode.values.last
+		while( not @inequality.call @leftnode.values.last, @rightnode.values.last )
 			@rightnode.values = self.removeback @rightnode.values
 		end
 	end

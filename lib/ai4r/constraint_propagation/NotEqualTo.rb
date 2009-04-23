@@ -1,17 +1,18 @@
 class NotEqualTo<Edge
 	def initialize 
-		@inequalifty = '!='
+		@inequality = lambda { | a, b | a != b }
 	end
 	
-	def initalize( left, right )
+	def initialize(left, right)
 		@leftnode = left
 		@rightnode = right
-		@inequality = '!='
+		@inequality = lambda { | a, b | a != b }
 	end
 
 	def reducedomains
 	#this one is interesting can be any value in domain unless sizes of bothare 1.....
-		if( ( @leftnode.value.first = @leftnode.value.last ) and ( @rightnode.value.first = @rightnode.value.last ) )
+		if( not @inequality.call( @leftnode.value.first, @leftnode.value.last ) and 
+		    not @inequality.call( @rightnode.value.first,  @rightnode.value.last ) )
 			@rightnode.values = nil 
 		end
 	end

@@ -1,20 +1,20 @@
 class LessThenEqualTo<Edge
 	def initialize 
-		@inequalifty = '<='
+		@inequality = lambda { | a, b | a <= b }
 	end
 	
-	def initalize( lefthand, righthand )
+	def initialize(lefthand, righthand)
 		@lefthandnode = lefthand
 		@righthandnode = righthand
-		@inequality = '<='
+		@inequality = lambda { | a, b | a <= b }
 	end
 
 	def reducedomains
-		while( not @lefthand.values.first @inequality @righthand.values.first )
+		while(not @inequality.call @lefthand.values.first, @righthand.values.first)
 			@righthand.values = self.removefront @righthandvalues
 		end
 
-		while( not @lefthand.values.last @inequality @righthand.values.last )
+		while(not @inequality.call @lefthand.values.last, @righthand.values.last)
 			@lefthand.values = self.removeback @lefthand.values
 		end
 	end

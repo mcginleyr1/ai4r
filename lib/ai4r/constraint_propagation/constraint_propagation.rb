@@ -8,54 +8,14 @@
 # Mozilla Foundation at http://www.mozilla.org/MPL/MPL-1.1.txt
 module Ai4r
 	module ConstraintPropagation
-		class Node
-			attr_accessor :possiblevalues, :edges
+		require 'Node.rb'
+		require 'Edge.rb'
+		require 'EqualTo.rb'
+		require 'GreaterThen.rb'
+		require 'GreaterThenEqualTo.rb'
+		require 'LessThen.rb'
+		require 'LessThenEqualTo.rb'
+		require 'NotEqualTo.rb'
 
-			def initialize( startvalue, endvalue )
-				:possiblevalues << (starvalue..endvalue)
-			end
-		end
-
-		class LessThen
-			attr_accessor :inequality
-			def initialize 
-				@inequalifty = '<'
-			end
-		end
-
-		class LessThenEqualTo
-			attr_accessor :inequality
-			def initialize 
-				@inequalifty = '<='
-			end
-		end
-
-		class GreaterThen
-			attr_accessor :inequality
-			def initialize 
-				@inequalifty = '>'
-			end
-		end
-
-		class GreaterThenEqualTo
-			attr_accessor :inequality
-			def initialize 
-				@inequalifty = '>='
-			end
-		end
-
-		class EqualTo
-			attr_accessor :inequality
-			def initialize 
-				@inequalifty = '='
-			end
-		end
-
-		class NotEqualTo
-			attr_accessor :inequality
-			def initialize 
-				@inequalifty = '!='
-			end
-		end
 	end
 end

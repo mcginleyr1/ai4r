@@ -1,20 +1,20 @@
 class GreaterThen<Edge
 	def initialize 
-		@inequality = '>'
+		@inequality = lambda { |a, b| a > b }
 	end
 
-	def initalize( lefthand, righthand )
+	def initialize(lefthand, righthand)
 		@leftnode = lefthand
 		@rightnode = righthand
-		@inequality = '>'
+		@inequality = lambda { |a, b| a > b }
 	end
 
-	def reducdedomains
-		while( not @leftnode.values.last @inequality @rightnode.values.last )
+	def reducedomains
+		while(not @inequality.call @leftnode.values.last, @rightnode.values.last)
 			@rightnode.values = self.removeback @rightnode.values
 		end
 
-		while( not @leftnode.values.first @inequality @rightnode.values.first )
+		while(not @inequality.call @leftnode.values.first, @rightnode.values.first)
 			@leftnode.values = self.removefront @leftnode.values
 		end
 	end
