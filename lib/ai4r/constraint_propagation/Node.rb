@@ -1,5 +1,5 @@
 class Node
-	attr_accessor :values, :inputs, :outputs
+	attr_accessor :values, :inputs, :outputs, :name
 
 	def initialize(startvalue, endvalue)
 		@values = (startvalue..endvalue)
