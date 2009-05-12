@@ -1,5 +1,5 @@
 class SimplePropagator
-	attr_accessor :nodes
+	attr_accessor :nodes, :edgestoreduce
 
 	def add_node( startvalue, endvalue, name )
 		newnode = Node.new( startvalue, endvalue )
@@ -10,7 +10,7 @@ class SimplePropagator
 	def add_edge_between_nodes( startnodename, endnodename, dependency )
 		startnode = self.find_node startnodename
 		endnode = self.find_node endnodename
-		startnode.add_output( endnode, dependency )	
+		@edgestoreduce << startnode.add_output( endnode, dependency )	
 	end
 
 	def find_node( name )
@@ -19,6 +19,12 @@ class SimplePropagator
 			if( anode.name == name )
 				thereturnnode = anode
 			end
+		end
+	end
+
+	def begin_propagation
+		edgestoreduce.each do |anedge|
+				anedge.reducedomains
 		end
 	end
 end
