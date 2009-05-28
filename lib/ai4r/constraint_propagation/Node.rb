@@ -12,6 +12,11 @@ class Node
 	def initialize(startvalue, endvalue)
 		@values = (startvalue..endvalue)
 	end
+	
+	def initialize(name, startvalue, endvalue)
+		@values = (startvalue..endvalue)
+		@name 	= name
+	end
 
 	def add_output(righthandnode, edgetype)
 		edgetype.new(self, righthandnode)
