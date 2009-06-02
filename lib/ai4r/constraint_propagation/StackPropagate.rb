@@ -7,6 +7,15 @@
 # the Mozilla Public License version 1.1  as published by the 
 # Mozilla Foundation at http://www.mozilla.org/MPL/MPL-1.1.txt
 class StackPropagator
+	require 'Edge.rb'
+	require 'EqualTo.rb'
+	require 'GreaterThen.rb'
+	require 'GreaterThenEqualTo.rb'
+	require 'LessThen.rb'
+	require 'Node.rb'
+	require 'NotEqualTo.rb'
+	require 'set'
+
 	attr_accessor :nodes, :edgestoreduce
 
 	def initialize
@@ -22,7 +31,8 @@ class StackPropagator
 	def add_edge_between_nodes( startnodename, endnodename, dependency )
 		startnode = self.find_node startnodename
 		endnode = self.find_node endnodename
-		@edgestoreduce << startnode.add_output( endnode, dependency )	
+		thedependency = self.find_edge_type dependency
+		@edgestoreduce << startnode.add_output( endnode, thedependency )	
 	end
 
 	def find_node( name )
@@ -32,6 +42,7 @@ class StackPropagator
 				thereturnnode = anode
 			end
 		end
+		thereturnnode
 	end
 
 	def begin_propagation
@@ -40,6 +51,22 @@ class StackPropagator
 			anedge.rightnode.outputs.each do |aoedge|
 				edgestoreduce << aoedge
 			end
+		end
+	end
+
+	def find_edge_type( name )
+		if name == 'LessThenEqualTo'
+			return LessThenEqualTo
+		elsif name == 'LessThen'
+			return LessThen
+		elsif name == 'GreaterThenEqualTo'
+			return GreaterThenEqualTo
+		elsif name == 'GreaterThen'
+			return GreaterThen
+		elsif name == 'EqualTo'
+			return EqualTo
+		elsif name == 'NotEqualTo'
+			return NotEqualTo
 		end
 	end
 

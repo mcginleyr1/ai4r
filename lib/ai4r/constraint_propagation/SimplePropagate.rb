@@ -7,8 +7,17 @@
 # the Mozilla Public License version 1.1  as published by the 
 # Mozilla Foundation at http://www.mozilla.org/MPL/MPL-1.1.txt
 class SimplePropagator
-	attr_accessor :nodes, :edgestoreduce
+	require 'Edge.rb'
+	require 'EqualTo.rb'
+	require 'GreaterThen.rb'
+	require 'GreaterThenEqualTo.rb'
+	require 'LessThen.rb'
+	require 'Node.rb'
+	require 'NotEqualTo.rb'
+	require 'set'
 
+	attr_accessor :nodes, :edgestoreduce
+	
 	def add_node( startvalue, endvalue, name )
 		newnode = Node.new( startvalue, endvalue )
 		newnode.name = name 
