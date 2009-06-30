@@ -1,18 +1,20 @@
-require 'StackPropagate.rb'
+require 'stack_propagate'
 #require 'Node.rb'
 #require 'set'
 
-propagator = StackPropagator.new
+propagate = StackPropagate.new
 file = File.open( 'nodes' )
 lines = file.readlines
 lines.each do |singleline|
 	attributes = singleline.split ' ' 
-	propagator.add_node( attributes[0], attributes[1], attributes[2] )
+	propagate.add_node( attributes[0], attributes[1], attributes[2] )
 end
 
 file = File.open( 'edges' )
 lines = file.readlines
 lines.each do | singleline|
 	constraintinfo = singleline.split ' '
-	propagator.add_edge_between_nodes( constraintinfo[0], constraintinfo[1], constraintinfo[2] )
+	propagate.add_edge_between_nodes( constraintinfo[0], constraintinfo[2], constraintinfo[1] )
 end
+
+propagate.begin_propagation

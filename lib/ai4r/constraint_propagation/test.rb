@@ -1,11 +1,12 @@
-require 'Node.rb'
-require 'Edge.rb'
-require 'EqualTo.rb'
-require 'GreaterThen.rb'
-require 'GreaterThenEqualTo.rb'
-require 'LessThen.rb'
-require 'LessThenEqualTo.rb'
-require 'NotEqualTo.rb'
+require 'edge'
+require 'equal_to'
+require 'greater_then'
+require 'greater_then_equal_to'
+require 'less_then'
+require 'less_then_equal_to'
+require 'node'
+require 'not_equal_to'
+require 'set'
 
 node1 = Node.new(5,8)
 node2 = Node.new(7,10)
