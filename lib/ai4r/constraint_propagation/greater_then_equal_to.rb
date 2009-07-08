@@ -18,17 +18,33 @@ class GreaterThenEqualTo<Edge
 	end
 
 	def reducedomains
-		if( not @inequality.call @leftnode.values.last, @rightnode.values.first )
-			@rightnode.values = nil 
+		@leftnode.value.each do |lvalues|
+			@rightnode.values.each do |rvalues|
+				if( not @inequality.call lvalues.last, rvalues.first )
+					@rightnode.values.remove rvalues
+				end
+			end
 		end
 		
-		if( not @inequality.call @leftnode.values.first, @rightnode.values.first )
-			@leftnode.values = Range.new( @rightnode.values.first, @leftnode.values.last )
+		@leftnode.value.each do |lvalues|
+			@rightnode.values.each do |rvalues|
+				if( not @inequality.call lvalues.first, rvalues.first )
+					@leftnode.value.remove lvalues
+					@leftnode.values = Range.new( rvalues.first, lvalues.last )
+				end
+			end
 		end
+
 	
-		if( not @inequality.call @leftnode.values.last, @rightnode.values.last )
-			@rightnode.values = Range.new( @rightnode.values.first, @leftnode.values.last )
+		@leftnode.value.each do |lvalues|
+			@rightnode.values.each do |rvalues|
+				if( not @inequality.call lvalues.last, rvalues.last )
+					@rightnode.values.remove rvalues
+					@rightnode.values = Range.new( rvalues.first, lvalues.last )
+				end
+			end
 		end
+
 #		while( not @inequality.call @leftnode.values.first, @rightnode.values.first )
 #			@leftnode.values = self.removefront @leftnode
 #		end

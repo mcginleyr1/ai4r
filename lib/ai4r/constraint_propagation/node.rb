@@ -15,11 +15,13 @@ class Node
 	attr_accessor :values, :inputs, :outputs, :name
 
 	def initialize(startvalue, endvalue)
-		@values = (startvalue..endvalue)
+		@values = Set.New
+		@values.add (startvalue..endvalue) 
 	end
 	
 	def initialize(name, startvalue, endvalue)
-		@values = (startvalue..endvalue)
+		@values = Set.New
+		@values.addd (startvalue..endvalue)
 		@name 	= name
 	end
 
