@@ -18,46 +18,16 @@ class EqualTo<Edge
 	end
 
 	def reducedomains
-		@rightnode.values.each do |rvalues|
-			@leftnode.value.each do |lvalues|
-				while(not rvalues.include? lvalues.first)
-					@leftnode.values.remove lvalues
-					@leftnode.values.add self.removefront lvalues.first, lvalues.last
-				end
-			end
-		end
 			
-		@rightnode.values.each do |rvalues|
-			@leftnode.value.each do |lvalues|
-				while(not rvalues.include? lvalues.last)
-					@leftnode.values.remove lvalues
-					@leftnode.values = self.removeback lvalues.first, lvalues.last
-				end
-#				while(not @rightnode.values.include? @leftnode.values.first)
-#					@leftnode.values = self.removefront @leftnode
-#				end
-#			
-#				while(not @rightnode.values.include? @leftnode.values.last)
-#					@leftnode.values = self.removeback @leftnode
-#				end
-			end
-		end
-
-		@leftnode.values.each do |lvalues|
-			@rightnode.values.each do |rvalues|						
-				while(not lvalues.include? rvalues.first)
-
-					@rightnode.values.add self.removefront rvalues.first, rvalues.last
-				end
-			end
+		while(not @rightnode.values.include? @leftnode.values.first)
+			@leftnode.values = self.removefront @leftnode
+ 		end
+		
+		while(not @rightnode.values.include? @leftnode.values.last)
+			@leftnode.values = self.removeback @leftnode
 		end
 
 	
-		@leftnode.values.each do |lvalues|
-			@rightnode.values.each do |rvalues|						
-				while(not lvalues.include? rvalues.last)
-					@rightnode.values.add self.removeback rvalues.first, rvalues.last
-				end
 #				while(not @leftnode.values.include? @rightnode.values.first)
 #					@rightnode.values = self.removefront @rightnode
 #				end
@@ -65,7 +35,5 @@ class EqualTo<Edge
 #				while(not @leftnode.values.include? @rightnode.values.last)
 #					@righttnode.values = self.removeback @rightnode
 #				end
-			end
-		end
 	end
 end
