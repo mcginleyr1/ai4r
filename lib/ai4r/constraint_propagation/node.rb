@@ -14,11 +14,11 @@
 class Node
 	attr_accessor :values, :inputs, :outputs, :name
 
-	def initialize(startvalue, endvalue)
-		@values = (startvalue..endvalue) 
-	end
+#	def initialize(startvalue, endvalue)
+#		@values = (startvalue..endvalue) 
+#	end
 	
-	def initialize(name, startvalue, endvalue)		
+	def initialize( startvalue, endvalue, name='' )		
 		@values = (startvalue..endvalue)
 		@name 	= name
 	end

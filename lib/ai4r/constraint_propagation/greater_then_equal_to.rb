@@ -27,25 +27,18 @@ class GreaterThenEqualTo<Edge
 			end
 		end
 =end		
-		@leftnode.value.each do |lvalues|
-			@rightnode.values.each do |rvalues|
-				if( not @inequality.call lvalues.first, rvalues.first )
-					@leftnode.value.remove lvalues
-					@leftnode.values = Range.new( rvalues.first, lvalues.last )
-				end
-			end
+		lvalues = @leftnode.values
+		rvalues = @rightnode.values
+		if( not @inequality.call lvalues.first, rvalues.first )		
+			@leftnode.values = Range.new( rvalues.first, lvalues.last )
 		end
 
 	
-		@leftnode.value.each do |lvalues|
-			@rightnode.values.each do |rvalues|
-				if( not @inequality.call lvalues.last, rvalues.last )
-					@rightnode.values.remove rvalues
-					@rightnode.values = Range.new( rvalues.first, lvalues.last )
-				end
-			end
+		
+		if( not @inequality.call lvalues.last, rvalues.last )
+			@rightnode.values = Range.new( rvalues.first, lvalues.last )
 		end
-
+		
 #		while( not @inequality.call @leftnode.values.first, @rightnode.values.first )
 #			@leftnode.values = self.removefront @leftnode
 #		end
