@@ -18,6 +18,7 @@ class GreaterThenEqualTo<Edge
 	end
 
 	def reducedomains
+=begin
 		@leftnode.value.each do |lvalues|
 			@rightnode.values.each do |rvalues|
 				if( not @inequality.call lvalues.last, rvalues.first )
@@ -25,7 +26,7 @@ class GreaterThenEqualTo<Edge
 				end
 			end
 		end
-		
+=end		
 		@leftnode.value.each do |lvalues|
 			@rightnode.values.each do |rvalues|
 				if( not @inequality.call lvalues.first, rvalues.first )
