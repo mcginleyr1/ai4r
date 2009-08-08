@@ -19,6 +19,12 @@ class Edge
 	def reducedomains
 	end
 
+	#select_value will be our value selection algorithms for when we are 
+	#searching
+	def select_value
+
+	end
+
 	def removefront(first, last)
 		Range.new( first + 1, last)
 	end

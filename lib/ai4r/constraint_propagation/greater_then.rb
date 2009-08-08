@@ -43,12 +43,18 @@ class GreaterThen<Edge
 			@leftnode.values = Range.new( @rightnode.values.first + 1, @leftnode.values.last )
 		end
 
-		while( not @inequality.call @leftnode.values.last, @rightnode.values.last )
-				@rightnode.values = self.removeback @rightnode
-		end
-		
-		while( not @inequality.call @leftnode.values.first, @rightnode.values.first )
-			@leftnode.values = self.removefront @leftnode
-		end
+#		while( not @inequality.call @leftnode.values.last, @rightnode.values.last )
+#				@rightnode.values = self.removeback @rightnode
+#		end
+#		
+#		while( not @inequality.call @leftnode.values.first, @rightnode.values.first )
+#			@leftnode.values = self.removefront @leftnode
+#		end
+	end
+
+	#select_value will be our value selection algorithms for when we are 
+	#searching
+	def select_value
+
 	end
 end

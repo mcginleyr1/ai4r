@@ -32,4 +32,10 @@ class LessThenEqualTo<Edge
 #			@leftnode.values = self.removeback @leftnode
 #		end
 	end
+
+	#select_value will be our value selection algorithms for when we are 
+	#searching
+	def select_value
+
+	end
 end
