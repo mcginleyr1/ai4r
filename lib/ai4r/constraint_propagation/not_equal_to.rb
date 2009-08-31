@@ -19,13 +19,6 @@ class NotEqualTo<Edge
 
 	def reducedomains
 
-	#can't really do this .... shitty idea?
-	#
-	#this one is interesting can be any value in domain unless sizes of bothare 1.....
-	#	if( not @inequality.call( @leftnode.values.first, @leftnode.values.last ) and 
-	#	    not @inequality.call( @rightnode.values.first,  @rightnode.values.last ) )
-	#		@rightnode.values = nil 
-	#	end
 	end
 
 

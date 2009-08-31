@@ -12,15 +12,17 @@
 
 
 class Node
-	attr_accessor :values, :inputs, :outputs, :name
+	attr_accessor :values, :inputs, :outputs, :name, :startvalue, :endvalue
 
 #	def initialize(startvalue, endvalue)
 #		@values = (startvalue..endvalue) 
 #	end
 	
 	def initialize( startvalue, endvalue, name='' )		
-		@values = (startvalue..endvalue)
-		@name 	= name
+		@values 		= (startvalue..endvalue)
+		@name 			= name
+		@startvalue = startvalue
+		@endvalue 	= endvalue
 	end
 
 	def add_output(righthandnode, edgetype)

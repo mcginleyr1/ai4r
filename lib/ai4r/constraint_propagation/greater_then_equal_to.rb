@@ -18,37 +18,23 @@ class GreaterThenEqualTo<Edge
 	end
 
 	def reducedomains
-=begin
-		@leftnode.value.each do |lvalues|
-			@rightnode.values.each do |rvalues|
-				if( not @inequality.call lvalues.last, rvalues.first )
-					@rightnode.values.remove rvalues
-				end
-			end
-		end
-=end		
-		lvalues = @leftnode.values
-		rvalues = @rightnode.values
+		
+		lvalues 		= @leftnode.values
+		rvalues 		= @rightnode.values
+
+		@firstleft  = lvalues.first
+		@lastleft   = lvalues.last
+		@firstright = rvalues.first
+		@lastright  = rvalues.last
+
 		if( not @inequality.call lvalues.first, rvalues.first )		
 			@leftnode.values = Range.new( rvalues.first, lvalues.last )
 		end
 
-	
 		
 		if( not @inequality.call lvalues.last, rvalues.last )
-			@rightnode.values = Range.new( rvalues.first, lvalues.last )
+			@rightnode.values = Range.new( rvalues.first, lvalues.l
 		end
-		
-#		while( not @inequality.call @leftnode.values.first, @rightnode.values.first )
-#			@leftnode.values = self.removefront @leftnode
-#		end
-	
-#		while( not @inequality.call @leftnode.values.last, @rightnode.values.last )
-#			@rightnode.values = self.removeback @rightnode 
-#		end
-	end
-
-	#select_value will be our value selection algorithms for when we are 
 	#searching
 	def select_value
 

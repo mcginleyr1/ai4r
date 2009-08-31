@@ -7,7 +7,8 @@
 # the Mozilla Public License version 1.1  as published by the 
 # Mozilla Foundation at http://www.mozilla.org/MPL/MPL-1.1.txt
 class Edge
-	attr_accessor :inequality, :leftnode, :rightnode
+	attr_accessor :inequality, :leftnode, :rightnode, 
+							  :firstleft, :firstright, :lastleft, :lastright
 
 	def initialize(lefthand, righthand)
 		@leftnode = lefthand

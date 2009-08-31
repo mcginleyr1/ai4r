@@ -21,16 +21,10 @@ class LessThenEqualTo<Edge
 		if( not @inequality.call @leftnode.values.first, @rightnode.values.first )
 			@rightnode.values = Range.new( @leftnode.values.first, @rightnode.values.last )
 		end
-#		while(not @inequality.call @leftnode.values.first, @rightnode.values.first)
-#			@rightnode.values = self.removefront @rightnode
-#		end
 
 		if( not @inequality.call @leftnode.values.last, @rightnode.values.last )
 			@leftnode.values = Range.new( @leftnode.values.first, @rightnode.values.last )
 		end
-#		while(not @inequality.call @leftnode.values.last, @rightnode.values.last)
-#			@leftnode.values = self.removeback @leftnode
-#		end
 	end
 
 	#select_value will be our value selection algorithms for when we are 
