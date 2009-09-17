@@ -18,6 +18,7 @@ class EqualTo<Edge
 	end
 
 	def reducedomains
+		self.store_original_domains
 			
 		while(not @rightnode.values.include? @leftnode.values.first)
 			@leftnode.values = self.removefront @leftnode
@@ -26,7 +27,6 @@ class EqualTo<Edge
 		while(not @rightnode.values.include? @leftnode.values.last)
 			@leftnode.values = self.removeback @leftnode
 		end
-
 	
 		while(not @leftnode.values.include? @rightnode.values.first)
 			@rightnode.values = self.removefront @rightnode
@@ -36,6 +36,7 @@ class EqualTo<Edge
 			@righttnode.values = self.removeback @rightnode
 		end
 	end
+
 
 	#select_value will be our value selection algorithms for when we are 
 	#searching

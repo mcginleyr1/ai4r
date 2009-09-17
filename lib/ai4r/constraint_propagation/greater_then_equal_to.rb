@@ -18,14 +18,10 @@ class GreaterThenEqualTo<Edge
 	end
 
 	def reducedomains
+		self.store_original_domains		
 		
 		lvalues 		= @leftnode.values
 		rvalues 		= @rightnode.values
-
-		@firstleft  = lvalues.first
-		@lastleft   = lvalues.last
-		@firstright = rvalues.first
-		@lastright  = rvalues.last
 
 		if( not @inequality.call lvalues.first, rvalues.first )		
 			@leftnode.values = Range.new( rvalues.first, lvalues.last )

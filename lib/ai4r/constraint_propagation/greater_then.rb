@@ -18,6 +18,7 @@ class GreaterThen<Edge
 	end
 
 	def reducedomains
+		self.store_original_domains
 
 		if( not @inequality.call @leftnode.values.last, @rightnode.values.last )
 			@rightnode.values = Range.new( @rightnode.first, @leftnode.values.last - 1 )

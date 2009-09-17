@@ -21,8 +21,8 @@ class Node
 	def initialize( startvalue, endvalue, name='' )		
 		@values 		= (startvalue..endvalue)
 		@name 			= name
-		@startvalue = startvalue
-		@endvalue 	= endvalue
+		@startvalue 	= startvalue
+		@endvalue 		= endvalue
 	end
 
 	def add_output(righthandnode, edgetype)

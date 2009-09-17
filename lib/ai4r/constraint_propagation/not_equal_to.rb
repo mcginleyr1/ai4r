@@ -18,7 +18,7 @@ class NotEqualTo<Edge
 	end
 
 	def reducedomains
-
+		self.store_original_domains
 	end
 
 
