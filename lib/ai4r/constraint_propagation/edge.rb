@@ -14,10 +14,15 @@ class Edge
 	def initialize(lefthand, righthand)
 		@leftnode    = lefthand
 		@rightnode   = righthand
+		@rightdomain = Array.new
+		@leftdomain  = Array.new
 		@leftnode.outputs.add self
 		@rightnode.inputs.add self
-		@rightdomain = []
-		@leftdomain  = []
+	end
+
+	def init_common_variables
+		@rightdomain = Array.new
+		@leftdomain  = Array.new
 	end
 
 	def reducedomains
@@ -38,11 +43,11 @@ class Edge
 		@rightnode.values = @rightdomain.pop
 	end	
 
-	def removefront(first, last)
-		Range.new( first + 1, last)
+	def removefront( node )
+		node.values = ( node.values.first + 1 )..node.values.last	
 	end
 
-	def removeback(first, last)
-		Range.new( first, last - 1)
+	def removeback( node )
+		node.values = node.values.first..(node.values.last - 1 )	
 	end
 end

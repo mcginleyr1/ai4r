@@ -8,13 +8,15 @@
 # Mozilla Foundation at http://www.mozilla.org/MPL/MPL-1.1.txt
 class NotEqualTo<Edge
 	def initialize 
+		self.init_common_variables
 		@inequality = lambda { | a, b | a != b }
 	end
 	
 	def initialize(left, right)
-		@leftnode = left
-		@rightnode = right
-		@inequality = lambda { | a, b | a != b }
+	    self.init_common_variables
+		@leftnode   = left
+		@rightnode  = right
+		@inequality = lambda { | a, b | a != b }		
 	end
 
 	def reducedomains

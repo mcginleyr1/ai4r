@@ -8,12 +8,14 @@
 # Mozilla Foundation at http://www.mozilla.org/MPL/MPL-1.1.txt
 class LessThenEqualTo<Edge
 	def initialize 
+	    self.init_common_variables
 		@inequality = lambda { | a, b | a <= b }
 	end
 	
 	def initialize(leftnode, rightnode)
-		@leftnode = leftnode
-		@rightnode = rightnode
+		self.init_common_variables
+		@leftnode   = leftnode
+		@rightnode  = rightnode
 		@inequality = lambda { | a, b | a <= b }
 	end
 

@@ -8,12 +8,14 @@
 # Mozilla Foundation at http://www.mozilla.org/MPL/MPL-1.1.txt
 class GreaterThenEqualTo<Edge
 	def initialize 
+	    self.init_common_variables
 		@inequality = lambda { | a, b | a >= b }
 	end
 	
 	def initialize(lefthand, righthand)
-		@leftnode = lefthand
-		@rightnode = righthand
+		self.init_common_variables
+		@leftnode   = lefthand
+		@rightnode  = righthand
 		@inequality = lambda { | a, b | a >= b }
 	end
 
@@ -29,10 +31,11 @@ class GreaterThenEqualTo<Edge
 
 		
 		if( not @inequality.call lvalues.last, rvalues.last )
-			@rightnode.values = Range.new( rvalues.first, lvalues.l
+			@rightnode.values = Range.new( rvalues.first, lvalues.last )
 		end
-	#searching
-	def select_value
-
 	end
+	#searching
+	#def select_value
+
+	#end
 end

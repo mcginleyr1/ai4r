@@ -8,12 +8,14 @@
 # Mozilla Foundation at http://www.mozilla.org/MPL/MPL-1.1.txt
 class GreaterThen<Edge
 	def initialize 
+		self.init_common_variables
 		@inequality = lambda { |a, b| a > b }
 	end
 
 	def initialize(lefthand, righthand)
-		@leftnode = lefthand
-		@rightnode = righthand
+		self.init_common_variables
+		@leftnode   = lefthand
+		@rightnode  = righthand
 		@inequality = lambda { |a, b| a > b }
 	end
 
