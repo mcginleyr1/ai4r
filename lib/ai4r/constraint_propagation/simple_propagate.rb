@@ -7,38 +7,7 @@
 # the Mozilla Public License version 1.1  as published by the 
 # Mozilla Foundation at http://www.mozilla.org/MPL/MPL-1.1.txt
 class SimplePropagator
-	require 'edge'
-	require 'equal_to'
-	require 'greater_then'
-	require 'greater_then_equal_to'
-	require 'less_then'
-	require 'less_then_equal_to'
-	require 'node'
-	require 'not_equal_to'
-	require 'set'
-
-	attr_accessor :nodes, :edgestoreduce
-	
-	def add_node( startvalue, endvalue, name )
-		newnode = Node.new( startvalue, endvalue )
-		newnode.name = name 
-		@nodes << newnode
-	end
-
-	def add_edge_between_nodes( startnodename, endnodename, dependency )
-		startnode = self.find_node startnodename
-		endnode = self.find_node endnodename
-		@edgestoreduce << startnode.add_output( endnode, dependency )	
-	end
-
-	def find_node( name )
-		thereturnnode
-		@nodes.each do |anode|
-			if( anode.name == name )
-				thereturnnode = anode
-			end
-		end
-	end
+	require 'dependency_graph'
 
 	def begin_propagation
 		edgestoreduce.each do |anedge|

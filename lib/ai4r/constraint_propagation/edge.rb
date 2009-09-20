@@ -12,10 +12,12 @@ class Edge
 				  :rightdomain							  
 
 	def initialize(lefthand, righthand)
-		@leftnode = lefthand
-		@rightnode = righthand
+		@leftnode    = lefthand
+		@rightnode   = righthand
 		@leftnode.outputs.add self
 		@rightnode.inputs.add self
+		@rightdomain = []
+		@leftdomain  = []
 	end
 
 	def reducedomains
@@ -27,14 +29,13 @@ class Edge
 	end
 	
 	def store_original_domains
-		@leftdomain  = @leftnode.values
-		@rightdomain = @rightnode.values
-	end		
-	
+		@leftdomain.push @leftnode.values
+		@rightdomain.push @rightnode.values
+	end			
 	
 	def restore_domains
-		@leftnode.values  = @firstleft..@lastleft
-		@rightnode.values = @firstright..@lastleft
+		@leftnode.values  = @leftdomain.pop
+		@rightnode.values = @rightdomain.pop
 	end	
 
 	def removefront(first, last)
