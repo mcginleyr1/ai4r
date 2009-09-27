@@ -16,7 +16,7 @@ require 'node'
 require 'not_equal_to'
 require 'set'
 
-class dependency_graph
+class DependencyGraph
 
 	attr_accessor :nodes, :edges
 	
