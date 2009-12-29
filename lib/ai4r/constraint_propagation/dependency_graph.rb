@@ -20,6 +20,10 @@ class DependencyGraph
 
 	attr_accessor :nodes, :edges
 	
+	def initialize 
+		@nodes = Set.new
+		@edges = Set.new
+	end
 
 	def add_node( startvalue, endvalue, name )
 		newnode = Node.new( startvalue, endvalue )
@@ -40,6 +44,7 @@ class DependencyGraph
 				the_return_node = anode
 			end
 		end
+		return the_return_node
 	end
 
 	def find_edge( leftname, rightname )
@@ -48,8 +53,7 @@ class DependencyGraph
 		the_return_edge = nil
 				
 		@edges.each do |anedge|
-			if( anedge.leftnode = left_node 
-				and anedge.rightnode = right_node)
+			if( anedge.leftnode = left_node and anedge.rightnode = right_node)
 					the_return_edge = anedge
 			end
 		end
@@ -91,4 +95,11 @@ class DependencyGraph
 		end
 	end
 
+	def to_s
+		temp = ''
+		@nodes.each do |a_node|		
+			temp = temp + ' | ' + a_node.to_s
+		end
+		return temp
+	end
 end

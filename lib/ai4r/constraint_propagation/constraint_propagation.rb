@@ -8,14 +8,26 @@
 # Mozilla Foundation at http://www.mozilla.org/MPL/MPL-1.1.txt
 module Ai4r
 	module ConstraintPropagation
-		require 'Node.rb'
-		require 'Edge.rb'
-		require 'EqualTo.rb'
-		require 'GreaterThen.rb'
-		require 'GreaterThenEqualTo.rb'
-		require 'LessThen.rb'
-		require 'LessThenEqualTo.rb'
-		require 'NotEqualTo.rb'
-
+		require 'dependency_graph'
+		require 'simple_propagator'
+		
+		class Propagation_Engine
+			attr_accessor @graph, @propagator
+			
+			def initialize( type )
+				@graph 		= DependencyGraph.new
+				@propagator = type.new @graph
+			end
+			
+			def load_graph( node_file, edge_file )
+				@graph.import_nodes node_file
+				@graph.import_edges edge_file
+			end
+			
+			def run_propagation
+				return @propagator.propagate 
+			end
+		end
+		
 	end
 end

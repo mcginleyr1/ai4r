@@ -32,4 +32,8 @@ class Node
 	def add_input(lefthandnode, edgetype)
 		edgetype.new(lefthandnode, self)
 	end
+	
+	def to_s
+		return @startvalue.to_s + '...' + @endvalue.to_s
+	end
 end
