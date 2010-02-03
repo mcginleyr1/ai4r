@@ -14,8 +14,13 @@ class SimplePropagator
 	end
 	
 	def propagate
-	
+		working_stack = []
+		@graph.random_traverse do |a_node|
+			working_stack.push a_node
+		end
 		return @graph.to_string
 	end
+	
+	
 	
 end

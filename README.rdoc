@@ -1,3 +1,7 @@
+
+=RM_NOTE
+ It would appaer to me that most of ai4r.rubyfordge.org has crapped the bed.  I'll be looking into alternative places for questions.
+
 = Introduction
 
 This project aims to produce ruby implementations of 

@@ -102,4 +102,10 @@ class DependencyGraph
 		end
 		return temp
 	end
+	
+	def random_traverse
+		@nodes.each do |a_node|
+			yield a_node
+		end
+	end
 end
