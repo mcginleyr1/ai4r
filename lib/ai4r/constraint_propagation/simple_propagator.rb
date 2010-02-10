@@ -18,6 +18,18 @@ class SimplePropagator
 		@graph.random_traverse do |a_node|
 			working_stack.push a_node
 		end
+		
+		while not working_stack.empty? do
+			a_node = working_stack.pop
+			a_node.outputs.each do |an_edge|
+				an_edge.reduce_domains
+				if( an_edge.rightnode.values.size = 0 ) do
+					an_edge.restore_domains
+				else
+					working_stack.push an_edge.rightnode
+				end
+			end
+		end		
 		return @graph.to_string
 	end
 	
