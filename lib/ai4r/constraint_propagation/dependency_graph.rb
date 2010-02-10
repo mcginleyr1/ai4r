@@ -108,4 +108,18 @@ class DependencyGraph
 			yield a_node
 		end
 	end
+	
+	def circular? 
+		passed_nodes = Array.new
+		self.random_traverse do |a_node|
+			a_node.outputs.each do |an_edge| 
+				if( passed_nodes.include? an_edge.rightnode ) do				
+					return true
+				else
+					passed_nodes << an_edge.rightnode
+				end
+			end 
+		end
+		return false;
+	end
 end
