@@ -7,30 +7,26 @@
 # the Mozilla Public License version 1.1  as published by the 
 # Mozilla Foundation at http://www.mozilla.org/MPL/MPL-1.1.txt
 
-
-#I HAVE TO CONVERT THIS TO A SET OF RANGES ...............
-
-
 class Node
 	attr_accessor :values, :inputs, :outputs, :name, :startvalue, :endvalue
-
-#	def initialize(startvalue, endvalue)
-#		@values = (startvalue..endvalue) 
-#	end
 	
 	def initialize( startvalue, endvalue, name='' )		
 		@values 		= (startvalue..endvalue)
 		@name 			= name
 		@startvalue 	= startvalue
 		@endvalue 		= endvalue
+		@inputs			= Set.new
+		@outputs		= Set.new
 	end
 
 	def add_output(righthandnode, edgetype)
-		edgetype.new(self, righthandnode)
+		an_edge = edgetype.new(self, righthandnode)
+		@outputs << an_edge
 	end
 
 	def add_input(lefthandnode, edgetype)
-		edgetype.new(lefthandnode, self)
+		an_edge = edgetype.new(lefthandnode, self)
+		@inputs << an_edge
 	end
 	
 	def to_s

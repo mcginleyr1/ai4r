@@ -12,7 +12,7 @@ module Ai4r
 		require 'simple_propagator'
 		
 		class Propagation_Engine
-			attr_accessor @graph, @propagator
+			attr_accessor :graph, :propagator
 			
 			def initialize( type )
 				@graph 		= DependencyGraph.new
@@ -25,6 +25,7 @@ module Ai4r
 			end
 			
 			def run_propagation
+				raise "Graph contains circularity." if @graph.circular?
 				return @propagator.propagate 
 			end
 		end

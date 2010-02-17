@@ -19,7 +19,7 @@ class EqualTo<Edge
 		@inequality = lambda { | a, b | a = b }
 	end
 
-	def reducedomains
+	def reduce_domains
 		self.store_original_domains
 			
 		while(not @rightnode.values.include? @leftnode.values.first)

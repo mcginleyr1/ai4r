@@ -19,7 +19,7 @@ class LessThen<Edge
 		@inequality = lambda { | a, b | a < b }
 	end
 
-	def reducedomains
+	def reduce_domains
 		self.store_original_domains
 	
 		if( not @inequality.call @leftnode.values.first, @rightnode.values.last ) 

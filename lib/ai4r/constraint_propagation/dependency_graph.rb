@@ -25,7 +25,7 @@ class DependencyGraph
 		@edges = Set.new
 	end
 
-	def add_node( startvalue, endvalue, name )
+	def add_node( name, startvalue, endvalue )
 		newnode = Node.new( startvalue, endvalue )
 		newnode.name = name 
 		@nodes << newnode
@@ -33,11 +33,12 @@ class DependencyGraph
 
 	def add_edge_between_nodes( startnodename, endnodename, dependency )
 		startnode = self.find_node startnodename
-		endnode = self.find_node endnodename
-		@edges << startnode.add_output( endnode, dependency )	
+		endnode   = self.find_node endnodename
+		edge_type = self.find_edge_type dependency
+		@edges << startnode.add_output( endnode, edge_type )	
 	end
 	
-	def find_node( name )
+	def find_node( name )	
 		the_return_node = nil
 		@nodes.each do |anode|
 			if( anode.name == name )
@@ -61,6 +62,7 @@ class DependencyGraph
 		the_return_edge
 	end
 	
+	#Don't want to eval or anything so 
 	def find_edge_type( name )
 		if name == 'LessThenEqualTo'
 			return LessThenEqualTo
@@ -87,11 +89,11 @@ class DependencyGraph
 	end
 	
 	def import_edges( file )
-		file = File.open( 'edges' )
+		file = File.open( file )
 		lines = file.readlines
 		lines.each do | singleline|
 			constraint_info = singleline.split ' '
-			self.add_edge_between_nodes( constraint_info[0], constraint_info[2], constraint_info[1] )
+			self.add_edge_between_nodes( constraint_info[0], constraint_info[1], constraint_info[2] )
 		end
 	end
 
@@ -113,7 +115,7 @@ class DependencyGraph
 		passed_nodes = Array.new
 		self.random_traverse do |a_node|
 			a_node.outputs.each do |an_edge| 
-				if( passed_nodes.include? an_edge.rightnode ) do				
+				if( passed_nodes.include? an_edge.rightnode ) 				
 					return true
 				else
 					passed_nodes << an_edge.rightnode

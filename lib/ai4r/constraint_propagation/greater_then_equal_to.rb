@@ -19,7 +19,7 @@ class GreaterThenEqualTo<Edge
 		@inequality = lambda { | a, b | a >= b }
 	end
 
-	def reducedomains
+	def reduce_domains
 		self.store_original_domains		
 		
 		lvalues 		= @leftnode.values
